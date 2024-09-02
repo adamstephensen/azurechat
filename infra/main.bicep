@@ -6,11 +6,6 @@ targetScope = 'subscription'
 param name string
 
 @minLength(1)
-@maxLength(64)
-@description('Environment suffix.')
-param suffix string
-
-@minLength(1)
 @description('Primary location for all resources')
 param location string
 
@@ -81,7 +76,6 @@ module resources 'resources.bicep' = {
   scope: rg
   params: {
     name: name
-    resourceToken: suffix //resourceToken
     tags: tags
     openai_api_version: openAIApiVersion
     openAiLocation: openAILocation
