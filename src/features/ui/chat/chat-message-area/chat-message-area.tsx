@@ -3,6 +3,7 @@ import { cn } from "@/ui/lib";
 import {
   CheckIcon,
   ClipboardIcon,
+  FileText,
   PocketKnife,
   UserCircle,
 } from "lucide-react";
@@ -17,20 +18,34 @@ export const ChatMessageArea = (props: {
   role: "function" | "user" | "assistant" | "system" | "tool";
   onCopy: () => void;
 }) => {
-  const [isIconChecked, setIsIconChecked] = useState(false);
+  const [isCopyIconChecked, setIsCopyIconChecked] = useState(false);
+  const [isWordIconChecked, setIsWordIconChecked] = useState(false);
 
-  const handleButtonClick = () => {
+  const handleCopyButtonClick = () => {
     props.onCopy();
-    setIsIconChecked(true);
+    setIsCopyIconChecked(true);
+  };
+
+  const handleWordButtonClick = () => {
+    props.onCopy();
+    setIsWordIconChecked(true);
   };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setIsIconChecked(false);
+      setIsCopyIconChecked(false);
     }, 2000);
 
     return () => clearTimeout(timeout);
-  }, [isIconChecked]);
+  }, [isCopyIconChecked]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsWordIconChecked(false);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, [isWordIconChecked]);
 
   let profile = null;
 
@@ -90,12 +105,26 @@ export const ChatMessageArea = (props: {
               size={"sm"}
               title="Copy text"
               className="justify-right flex"
-              onClick={handleButtonClick}
+              onClick={handleCopyButtonClick}
             >
-              {isIconChecked ? (
+              {isCopyIconChecked ? (
                 <CheckIcon size={16} />
               ) : (
                 <ClipboardIcon size={16} />
+              )}
+            </Button>
+            </div><div>
+            <Button
+              variant={"ghost"}
+              size={"sm"}
+              title="Word Document"
+              className="justify-right flex"
+              onClick={handleWordButtonClick}
+            >
+              {isWordIconChecked ? (
+                <CheckIcon size={16} />
+              ) : (
+                <FileText size={16} />
               )}
             </Button>
           </div>
