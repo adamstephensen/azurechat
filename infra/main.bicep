@@ -2,8 +2,13 @@ targetScope = 'subscription'
 
 @minLength(1)
 @maxLength(64)
-@description('Name of the the environment which is used to generate a short unique hash used in all resources.')
+@description('Name of the the environment.')
 param name string
+
+@minLength(1)
+@maxLength(64)
+@description('Environment suffix.')
+param suffix string
 
 @minLength(1)
 @description('Primary location for all resources')
@@ -61,7 +66,7 @@ param storageServiceImageContainerName string = 'images'
 
 param resourceGroupName string = ''
 
-var resourceToken = toLower(uniqueString(subscription().id, name, location))
+//var resourceToken = toLower(uniqueString(subscription().id, name, location))
 var tags = { 'azd-env-name': name }
 
 // Organize resources in a resource group
@@ -76,7 +81,7 @@ module resources 'resources.bicep' = {
   scope: rg
   params: {
     name: name
-    resourceToken: resourceToken
+    resourceToken: suffix //resourceToken
     tags: tags
     openai_api_version: openAIApiVersion
     openAiLocation: openAILocation
