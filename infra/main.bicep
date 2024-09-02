@@ -30,9 +30,9 @@ param embeddingDeploymentName string = 'embedding'
 param embeddingDeploymentCapacity int = 120
 param embeddingModelName string = 'text-embedding-ada-002'
 
-// DALL-E v3 only supported in Sweden Central for now
+// DALL-E v3 only supported in certain regions. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
 @description('Location for the OpenAI DALL-E 3 instance resource group')
-@allowed(['swedencentral'])
+@allowed(['australiaeast','eastus','swedencentral',])
 param dalleLocation string
 
 param dalleDeploymentCapacity int = 1
@@ -40,9 +40,9 @@ param dalleDeploymentName string = 'dall-e-3'
 param dalleModelName string = 'dall-e-3'
 param dalleApiVersion string = '2023-12-01-preview'
 
-// DALL-E v3 only supported in Sweden Central for now
+// GPT Vision only supported in certain regions. https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
 @description('Location for the GPT vision instance resource')
-@allowed(['swedencentral','westus',])
+@allowed(['australiaeast','swedencentral','westus','japaneast','switzerlandnorth',])
 param gptvisionLocation string
 
 param gptvisionDeploymentCapacity int = 1
