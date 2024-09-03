@@ -16,6 +16,7 @@ import {
   ChatThreadModel,
 } from "./chat-services/models";
 import MessageContent from "./message-content";
+import { generateWordDocument } from "./chat-export-service";
 
 interface ChatPageProps {
   messages: Array<ChatMessageModel>;
@@ -58,6 +59,9 @@ export const ChatPage: FC<ChatPageProps> = (props) => {
                 role={message.role}
                 onCopy={() => {
                   navigator.clipboard.writeText(message.content);
+                }}
+                onExport={() => {
+                  generateWordDocument(message.content);
                 }}
                 profilePicture={
                   message.role === "assistant"

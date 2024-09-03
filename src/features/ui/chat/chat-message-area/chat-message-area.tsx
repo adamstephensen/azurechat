@@ -11,12 +11,15 @@ import { useEffect, useState } from "react";
 import { Avatar, AvatarImage } from "../../avatar";
 import { Button } from "../../button";
 
+
+
 export const ChatMessageArea = (props: {
   children?: React.ReactNode;
   profilePicture?: string | null;
   profileName?: string;
   role: "function" | "user" | "assistant" | "system" | "tool";
   onCopy: () => void;
+  onExport: () => void;
 }) => {
   const [isCopyIconChecked, setIsCopyIconChecked] = useState(false);
   const [isWordIconChecked, setIsWordIconChecked] = useState(false);
@@ -27,7 +30,7 @@ export const ChatMessageArea = (props: {
   };
 
   const handleWordButtonClick = () => {
-    props.onCopy();
+    props.onExport();
     setIsWordIconChecked(true);
   };
 
