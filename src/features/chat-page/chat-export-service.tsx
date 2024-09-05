@@ -22,7 +22,7 @@ export const generateWordDocument = async (content:string) => {
 
   console.log("content from generateWordDocument");
   console.log(content);
-  const fullMarkdown =  content + naviWarning;
+  const fullMarkdown = removeNumbersFromStringUsingRegex(content)  + naviWarning;
   const doc = await processor.process(fullMarkdown);
   const blob = await doc.result;
 
